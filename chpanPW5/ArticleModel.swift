@@ -24,6 +24,7 @@ struct ArticleModel: Decodable {
     var announce: String?
     var img: ImageContainer?
     var requestId: String?
+    
     var articleUrl: URL? {
         let requestId = requestId ?? ""
         let newsId = newsId ?? 0
