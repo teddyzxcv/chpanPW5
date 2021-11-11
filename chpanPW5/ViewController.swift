@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import WebKit
 
 class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UpdatesDelegate {
+    
+    var window: UIWindow?
     private var tableView: UITableView!{
         didSet {
             // Configure Table View
@@ -16,6 +19,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
             tableView.dataSource = self
         }
     }
+    
     let cellId = "ArticleCell"
     var articleManager = ArticleManager()
     
@@ -52,6 +56,19 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         view.backgroundColor = UIColor.darkGray
         setupArticleView()
         // Do any additional setup after loading the view.
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let url = articles[indexPath.row].articleUrl {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let nav1 = UINavigationController()
+            let vc = webViewController()
+            vc.url = url
+            nav1.viewControllers = [vc]
+            self.window!.rootViewController = nav1
+            self.window?.makeKeyAndVisible()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func setupArticleView(){

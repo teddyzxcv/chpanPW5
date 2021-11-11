@@ -19,6 +19,8 @@
 		F2C628A7273C445C0005AA70 /* ArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C628A6273C445C0005AA70 /* ArticleManager.swift */; };
 		F2C628A9273C51BC0005AA70 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C628A8273C51BC0005AA70 /* ArticleCell.swift */; };
 		F2C628AB273DA2050005AA70 /* UpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C628AA273DA2050005AA70 /* UpdateDelegate.swift */; };
+		F2C628AD273DB3AA0005AA70 /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C628AC273DB3AA0005AA70 /* webViewController.swift */; };
+		F2C628AF273DB58A0005AA70 /* UIViewPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C628AE273DB58A0005AA70 /* UIViewPin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		F2C628A6273C445C0005AA70 /* ArticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleManager.swift; sourceTree = "<group>"; };
 		F2C628A8273C51BC0005AA70 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		F2C628AA273DA2050005AA70 /* UpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDelegate.swift; sourceTree = "<group>"; };
+		F2C628AC273DB3AA0005AA70 /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
+		F2C628AE273DB58A0005AA70 /* UIViewPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 				F2C628A6273C445C0005AA70 /* ArticleManager.swift */,
 				F2C628A8273C51BC0005AA70 /* ArticleCell.swift */,
 				F2C628AA273DA2050005AA70 /* UpdateDelegate.swift */,
+				F2C628AC273DB3AA0005AA70 /* webViewController.swift */,
+				F2C628AE273DB58A0005AA70 /* UIViewPin.swift */,
 			);
 			path = chpanPW5;
 			sourceTree = "<group>";
@@ -269,10 +275,12 @@
 				F2C62879273C0DB90005AA70 /* ViewController.swift in Sources */,
 				F2C62875273C0DB90005AA70 /* AppDelegate.swift in Sources */,
 				F2C628A9273C51BC0005AA70 /* ArticleCell.swift in Sources */,
+				F2C628AF273DB58A0005AA70 /* UIViewPin.swift in Sources */,
 				F2C628A7273C445C0005AA70 /* ArticleManager.swift in Sources */,
 				F2C628A5273C39210005AA70 /* ArticleModel.swift in Sources */,
 				F2C62877273C0DB90005AA70 /* SceneDelegate.swift in Sources */,
 				F2C628AB273DA2050005AA70 /* UpdateDelegate.swift in Sources */,
+				F2C628AD273DB3AA0005AA70 /* webViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
