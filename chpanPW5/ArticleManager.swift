@@ -12,8 +12,8 @@ class ArticleManager{
     
     var delegate : UpdatesDelegate?
     
-    private func getURL(_ rubric: Int, _ pageIndex: Int) -> URL? {
-        URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric)&pageSize=8&pageIndex=\(pageIndex)")
+    private func getURL(_ rubric: Int, _ pageIndex: Int, _ pagesize: Int) -> URL? {
+        URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric)&pageSize=\(pagesize)&pageIndex=\(pageIndex)")
     }
     public var articles: [ArticleModel]?{
         didSet {
@@ -23,7 +23,7 @@ class ArticleManager{
     
     // MARK: - Fetch news
     private func fetchNews() {
-        guard let url = getURL(4, 1) else { return }
+        guard let url = getURL(10, 12, 16) else { return }
         let task = URLSession.shared.dataTask(with: url) { [weak self] data,
             response, error in
             if let error = error {
