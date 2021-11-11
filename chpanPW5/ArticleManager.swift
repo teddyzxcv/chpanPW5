@@ -8,18 +8,24 @@
 import Foundation
 
 class ArticleManager{
+    
+    
+    var delegate : UpdatesDelegate?
+    
     private func getURL(_ rubric: Int, _ pageIndex: Int) -> URL? {
         URL(string: "https://news.myseldon.com/api/Section?rubricId=\(rubric)&pageSize=8&pageIndex=\(pageIndex)")
     }
-    public var articles: [ArticleModel]?
+    public var articles: [ArticleModel]?{
+        didSet {
+            self.delegate?.didUpdated(finished: true)
+        }
+    }
     
     // MARK: - Fetch news
     private func fetchNews() {
-        let sem = DispatchSemaphore.init(value: 0)
         guard let url = getURL(4, 1) else { return }
         let task = URLSession.shared.dataTask(with: url) { [weak self] data,
             response, error in
-            defer { sem.signal() }
             if let error = error {
                 print(error)
                 return
@@ -29,11 +35,9 @@ class ArticleManager{
                 JSONDecoder().decode(ArticlePage.self, from: data)
                 articlePage?.passTheRequestId()
                 self?.articles = articlePage?.news
-                print("1234")
             }
         }
         task.resume()
-        sem.wait()
     }
     
     public func setupArticles(){

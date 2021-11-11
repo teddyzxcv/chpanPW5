@@ -7,19 +7,34 @@
 
 import UIKit
 
-class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var tableView: UITableView!
+class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UpdatesDelegate {
+    private var tableView: UITableView!{
+        didSet {
+            // Configure Table View
+            tableView.isHidden = true
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     let cellId = "ArticleCell"
     var articleManager = ArticleManager()
-    var articles: [ArticleModel]?
+    
+    private var articles: [ArticleModel] = []{
+        didSet{
+            DispatchQueue.main.async{ [self] in
+                tableView.reloadData()
+                tableView.isHidden = articles.isEmpty
+            }
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articleManager.articles?.count ?? 2
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? ArticleCell
-        cell?.articleModel = articleManager.articles?[indexPath.row] ?? ArticleModel()
+        cell?.articleModel = articles[indexPath.row]
         cell?.setupCell()
         cell?.layer.cornerRadius  = 20
         cell?.layer.masksToBounds = true
@@ -32,6 +47,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        articleManager.delegate = self
         articleManager.setupArticles()
         view.backgroundColor = UIColor.darkGray
         setupArticleView()
@@ -47,18 +63,31 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         
         tableView.backgroundColor = UIColor.clear
-        tableView.rowHeight = 160
+        tableView.rowHeight = 200
         tableView.showsVerticalScrollIndicator = true
         tableView.translatesAutoresizingMaskIntoConstraints = false //
-        tableView.layer.cornerRadius = 35
+        tableView.layer.cornerRadius = 20
         tableView.layer.masksToBounds = true
         
         self.view.addSubview(tableView)
     }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.alwaysBounceVertical = true
     }
+    
+    func didUpdated(finished: Bool) {
+        guard finished else {
+            // Handle the unfinished state
+            return
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        articles = articleManager.articles ?? []
+    }
+    
 }
+
 

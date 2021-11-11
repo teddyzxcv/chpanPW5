@@ -15,10 +15,12 @@ class ArticleCell: UITableViewCell{
     
     let titlelabel: UILabel = {
         let control = UILabel()
-        control.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        control.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         control.textAlignment = .center
         control.textColor = UIColor.white
         control.translatesAutoresizingMaskIntoConstraints = false
+        control.lineBreakMode = .byWordWrapping
+        control.numberOfLines = 0
         return control
     }()
     
@@ -26,8 +28,10 @@ class ArticleCell: UITableViewCell{
         let control = UILabel()
         control.font = UIFont.systemFont(ofSize: 13, weight: .bold)
         control.textAlignment = .left
-        control.textColor = UIColor.black
+        control.textColor = UIColor.lightGray
         control.translatesAutoresizingMaskIntoConstraints = false
+        control.lineBreakMode = .byWordWrapping
+        control.numberOfLines = 0
         return control
     }()
     
@@ -61,12 +65,18 @@ class ArticleCell: UITableViewCell{
         announcelabel.text = articleModel.announce
         addSubview(titlelabel)
         addSubview(announcelabel)
-        titlelabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -40).isActive = true
+        titlelabel.topAnchor.constraint(equalTo: bottomAnchor, constant: -60).isActive = true
         titlelabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
         announcelabel.topAnchor.constraint(equalTo: titlelabel.bottomAnchor, constant: 5).isActive = true
         announcelabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         backgroundView = imageview
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 1
+        clipsToBounds = true
     }
     
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    }
 }
