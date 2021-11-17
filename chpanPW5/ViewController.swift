@@ -88,6 +88,44 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.view.addSubview(tableView)
     }
+    
+    private func handleMarkAsShare(index: IndexPath) {
+        if let url = articles[index.row].articleUrl{
+            var urlToShare = [Any]()
+            urlToShare.append(url)
+            let activityviewcontroller = UIActivityViewController(activityItems:urlToShare,applicationActivities: nil)
+            self.present(activityviewcontroller, animated: true, completion: nil)
+        }
+        print("Share")
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal,
+                                        title: "Share") { [weak self] (action, view, completionHandler) in
+            self?.handleMarkAsShare(index: indexPath)
+                                            completionHandler(true)
+        }
+        action.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView,
+                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal,
+                                        title: "Share") { [weak self] (action, view, completionHandler) in
+            self?.handleMarkAsShare(index: indexPath)
+                                            completionHandler(true)
+        }
+        action.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [action])
+    
+    }
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
